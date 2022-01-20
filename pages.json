@@ -18,6 +18,18 @@
 			"style": {
 				"navigationBarTitleText": "个人中心"
 			}
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+
+		}, {
+			"path": "pages/goods/goods",
+			"style": {
+				"navigationBarTitleText": "商品"
+			}
+
 		}
 	],
 	"globalStyle": {
@@ -27,7 +39,7 @@
 		"backgroundColor": "#F8F8F8"
 	},
 	"tabBar": {
-		"color": "#7A7E83",
+		"color": "#000000",
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
@@ -37,6 +49,16 @@
 			"selectedIconPath": "static/tabBar/shouye_1.png",
 			"text": "首页"
 		},{
+			"pagePath": "pages/goods/goods",
+			"iconPath": "static/tabBar/shangpin.png",
+			"selectedIconPath": "static/tabBar/shangpin-tianchong.png",
+			"text": "商品"
+		},{
+			"pagePath": "pages/cart/cart",
+			"iconPath": "static/tabBar/gouwuche.png",
+			"selectedIconPath": "static/tabBar/gouwuchexuanzhong.png",
+			"text": "购物车"
+		}, {
 			"pagePath": "pages/center/center",
 			"iconPath": "static/tabBar/geren.png",
 			"selectedIconPath": "static/tabBar/geren_1.png",
