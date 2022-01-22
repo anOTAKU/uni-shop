@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-swiper :list="swiperList"></u-swiper>
+    <u-swiper :list="slides" name="img_url" height="320"></u-swiper>
     <u-tabs
       class="index-tabs"
       bar-width="100"
@@ -10,49 +10,35 @@
       :current="currentSort"
       @change="changeSort"
     ></u-tabs>
-    <view class="goods-list">
+    <view class="goods-list u-skeleton">
       <u-row gutter="16">
-        <u-col span="6" v-for="i in 12" :key="i">
-          <view class="demo-layout bg-purple"
-            ><navigator
-              class="goods-item u-p-20 u-m-10"
-							url=""
-            >
-              <u-image
-                class="u-skeleton-rect"
-                width="100%"
-                height="300rpx"
-                src="https://oss.shop.eduwork.cn/product/2020-0820-5f3e059c25d7b.png"
-              ></u-image>
-              <view
-                class="u-skeleton-rect goods-title u-line-1 u-font-30 u-m-t-10 u-m-b-10"
-                >商品名称</view
-              >
-              <view class="u-flex u-row-between">
-                <text class="goods-price u-skeleton-rect"
-                  >￥20</text
-                >
-                <view class="small u-skeleton-rect u-text-right">
-                  <view>已售:5</view>
-                </view>
-              </view>
-            </navigator>
+        <u-col
+          span="6"
+          v-for="(item, index) in goods.length ? goods : [{}, {}, {}, {}]"
+          :key="index"
+        >
+          <view class="demo-layout bg-purple">
+            <goods-card :item="item"></goods-card>
           </view>
         </u-col>
       </u-row>
+
+      <!--骨骼架-->
     </view>
+    <u-skeleton
+      :loading="loading"
+      :animation="true"
+      bgColor="#FFF"
+    ></u-skeleton>
   </view>
 </template>
 
 <script>
+import goodsCard from "../../components/goods-card/goods-card.vue";
 export default {
+  components: { goodsCard },
   data() {
     return {
-      swiperList: [
-        "https://cdn.uviewui.com/uview/swiper/1.jpg",
-        "https://cdn.uviewui.com/uview/swiper/2.jpg",
-        "https://cdn.uviewui.com/uview/swiper/3.jpg",
-      ],
       list: [
         {
           name: "默认",
@@ -68,15 +54,48 @@ export default {
         },
       ],
       currentSort: 0,
-      src: "https://oss.shop.eduwork.cn/product/2020-0820-5f3e059c25d7b.png",
+      slides: [],
+      goods: [],
+      page: 1,
+      loading: false,
     };
   },
   methods: {
     changeSort(index) {
       this.currentSort = index;
+      //重置排序
+      this.goods = [];
+      this.page = 1;
+      this.getData();
+    },
+    //获取数据
+    async getData() {
+      this.loading = true; //显示骨骼架
+
+      const params = {
+        page: this.page,
+      };
+      //增加排序条件
+      if (this.currentSort == 1) params.sales = 1;
+      if (this.currentSort == 2) params.recommend = 1;
+      if (this.currentSort == 3) params.new = 1;
+      const res = await this.$u.api.index(params);
+
+      this.loading = false; //隐藏骨骼架
+
+      //轮播图
+      this.slides = res.slides;
+      //商品列表
+      this.goods = [...this.goods, ...res.goods.data];
     },
   },
-  components: {},
+  onLoad() {
+    this.getData();
+  },
+  async onReachBottom() {
+    this.page += 1;
+    this.getData();
+  },
 };
 </script>
 

@@ -1,68 +1,88 @@
 {
-	"easycom": {
-		// npm安装的方式不需要前面的"@/"，下载安装的方式需要"@/"
-		// npm安装方式
-		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
-		// 下载安装方式
-		// "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
-	},
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
-			"path": "pages/center/center",
-			"style": {
-				"navigationBarTitleText": "个人中心"
-			}
-		}, {
-			"path": "pages/cart/cart",
-			"style": {
-				"navigationBarTitleText": "购物车"
-			}
-
-		}, {
-			"path": "pages/goods/goods",
-			"style": {
-				"navigationBarTitleText": "商品"
-			}
-
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"color": "#000000",
-		"selectedColor": "#3cc51f",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/tabBar/shouye.png",
-			"selectedIconPath": "static/tabBar/shouye_1.png",
-			"text": "首页"
-		},{
-			"pagePath": "pages/goods/goods",
-			"iconPath": "static/tabBar/shangpin.png",
-			"selectedIconPath": "static/tabBar/shangpin-tianchong.png",
-			"text": "商品"
-		},{
-			"pagePath": "pages/cart/cart",
-			"iconPath": "static/tabBar/gouwuche.png",
-			"selectedIconPath": "static/tabBar/gouwuchexuanzhong.png",
-			"text": "购物车"
-		}, {
-			"pagePath": "pages/center/center",
-			"iconPath": "static/tabBar/geren.png",
-			"selectedIconPath": "static/tabBar/geren_1.png",
-			"text": "个人中心"
-		}]
-	}
+  "easycom": {
+    // npm安装的方式不需要前面的"@/"，下载安装的方式需要"@/"
+    // npm安装方式
+    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+    // 下载安装方式
+    // "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/center/center",
+      "style": {
+        "navigationBarTitleText": "个人中心"
+      }
+    },
+    {
+      "path": "pages/cart/cart",
+      "style": {
+        "navigationBarTitleText": "购物车"
+      }
+    },
+    {
+      "path": "pages/goods/goods",
+      "style": {
+        "navigationBarTitleText": "商品"
+      }
+    },
+    {
+      "path": "pages/auth/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/auth/register",
+      "style": {
+        "navigationBarTitleText": "注册",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/shouye.png",
+        "selectedIconPath": "static/tabBar/shouye_1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/goods/goods",
+        "iconPath": "static/tabBar/shangpin.png",
+        "selectedIconPath": "static/tabBar/shangpin-tianchong.png",
+        "text": "商品"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "iconPath": "static/tabBar/gouwuche.png",
+        "selectedIconPath": "static/tabBar/gouwuchexuanzhong.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/center/center",
+        "iconPath": "static/tabBar/geren.png",
+        "selectedIconPath": "static/tabBar/geren_1.png",
+        "text": "个人中心"
+      }
+    ]
+  }
 }

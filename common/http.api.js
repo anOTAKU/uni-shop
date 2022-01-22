@@ -9,12 +9,18 @@ const install = (Vue, vm) => {
 
 	// 请求首页
 	vm.$u.api.index = (params = {}) => vm.$u.get('/api/index', params);
+	
 
 	//认证相关的
 	//注册
 	vm.$u.api.authRegister = (params) => vm.$u.post('/api/auth/register', params);
 	//登录
 	vm.$u.api.authLogin = (params) => vm.$u.post('/api/auth/login', params);
+
+	// 用户相关的
+	// 用户详情
+	vm.$u.api.userInfo = () => vm.$u.get('/api/user');
+
 	
 	// 订单相关的
 	
