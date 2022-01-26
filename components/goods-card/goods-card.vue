@@ -1,7 +1,7 @@
 <template>
   <navigator
     class="goods-item u-p-20 u-m-10"
-    :url="`/pages/goods/goods-detail/goods-detail?id=${item.id}`"
+    :url="`/pages/goods/goods-detail?id=${item.id}`"
   >
     <u-image
       class="u-skeleton-rect"

@@ -61,6 +61,7 @@ export default {
     };
   },
   methods: {
+    // tab选择
     changeSort(index) {
       this.currentSort = index;
       //重置排序

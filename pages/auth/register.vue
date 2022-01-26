@@ -9,6 +9,7 @@
         :label-position="labelPosition"
         label="姓名"
         prop="name"
+        required
       >
         <u-input
           placeholder="请输入姓名"
@@ -25,6 +26,7 @@
         :label-position="labelPosition"
         label="邮箱"
         prop="email"
+        required
       >
         <u-input
           placeholder="请输入邮箱"
@@ -34,7 +36,12 @@
         ></u-input>
       </u-form-item>
       <!-- 密码 -->
-      <u-form-item :label-position="labelPosition" label="密码" prop="password">
+      <u-form-item
+        :label-position="labelPosition"
+        label="密码"
+        prop="password"
+        required
+      >
         <u-input
           :password-icon="true"
           :border="border"
@@ -48,7 +55,8 @@
         :label-position="labelPosition"
         label="确认密码"
         label-width="150"
-        prop="rePassword"
+        prop="password_confirmation"
+        required
       >
         <u-input
           :border="border"
@@ -75,6 +83,61 @@ export default {
       labelPosition: "left",
       border: true,
       check: false,
+      rules: {
+        name: [
+          {
+            required: true,
+            message: "请输入姓名",
+            trigger: "blur",
+          },
+          {
+            min: 3,
+            max: 12,
+            type: "string",
+            message: "姓名长度在3到12个字符",
+            trigger: ["change", "blur"],
+          },
+        ],
+        email: [
+          {
+            required: true,
+            message: "请输入邮箱",
+            trigger: "blur",
+          },
+          {
+            type: "email",
+            message: "邮箱格式不正确",
+            trigger: ["change", "blur"],
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "请输入密码",
+            trigger: ["change", "blur"],
+          },
+          {
+            // 正则不能含有两边的引号
+            pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]+\S{5,12}$/,
+            message: "需同时含有字母和数字，长度在6-12之间",
+            trigger: ["change", "blur"],
+          },
+        ],
+        password_confirmation: [
+          {
+            required: true,
+            message: "请重新输入密码",
+            trigger: ["change", "blur"],
+          },
+          {
+            validator: (rule, value, callback) => {
+              return value === this.form.password;
+            },
+            message: "两次输入的密码不相等",
+            trigger: ["change", "blur"],
+          },
+        ],
+      },
     };
   },
   methods: {
@@ -82,49 +145,38 @@ export default {
     checkboxChange(e) {
       this.check = e.value;
     },
-    // 表单错误提示
-    errorMessage(message) {
-      this.$u.toast(message);
-      return false;
-    },
-    // 表单验证
-    verification() {
-      if (this.$u.test.isEmpty(this.form.name)) {
-        this.errorMessage("姓名不能为空");
-      } else if (!this.$u.test.email(this.form.email)) {
-        this.errorMessage("邮箱错误或为空");
-      } else if (this.check !== true) {
-        this.errorMessage("请勾选同意uni-shop的版权协议");
-      } else {
-        return true;
-      }
-    },
     // 执行注册
     async submit() {
-      if (this.verification()) {
-        // 准备提交数据
-        const params = {
-          name: this.form.name,
-          email: this.form.email,
-          password: this.form.password,
-          password_confirmation: this.form.password_confirmation,
-        };
+      // 表单验证
+      this.$refs.uForm.validate((valid) => {
+        if (valid) {
+          if (!this.model.agreement) return this.$u.toast("请勾选协议");
+          console.log("验证通过");
+        } else {
+          console.log("验证失败");
+          return false;
+        }
+      });
+      // 准备提交数据
+      const params = this.form;
 
-        //请求api，执行注册
-        const res = await this.$u.api.authRegister(params);
+      //请求api，执行注册
+      await this.$u.api.authRegister(params);
 
-        this.$u.toast("注册成功！");
+      this.$u.toast("注册成功！");
 
-        //注册成功，重定向到登录
-        setTimeout(() => {
-          this.$u.route({
-            type: "redirect",
-            url: "pages/center/center",
-            params,
-          });
-        }, 1500);
-      }
+      //注册成功，重定向到登录
+      setTimeout(() => {
+        this.$u.route({
+          type: "redirect",
+          url: "pages/center/center",
+          params,
+        });
+      }, 1500);
     },
+  },
+  onReady() {
+    this.$refs.uForm.setRules(this.rules);
   },
 };
 </script>
