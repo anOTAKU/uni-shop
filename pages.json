@@ -59,6 +59,34 @@
         "navigationBarTitleText": "商品详情",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/center/collect",
+      "style": {
+        "navigationBarTitleText": "商品收藏",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/center/address",
+      "style": {
+        "navigationBarTitleText": "收获地址",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/center/addSite",
+      "style": {
+        "navigationBarTitleText": "地址设置",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/center/allOrder",
+      "style": {
+        "navigationBarTitleText": "全部订单",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "globalStyle": {

@@ -22,9 +22,21 @@
 
     <view class="u-m-t-20">
       <u-cell-group>
-        <u-cell-item icon="order" title="全部订单"></u-cell-item>
-        <u-cell-item icon="star" title="商品收藏"></u-cell-item>
-        <u-cell-item icon="more-dot-fill" title="收货地址"></u-cell-item>
+        <u-cell-item
+          icon="order"
+          title="全部订单"
+          @click="to(urlList[1])"
+        ></u-cell-item>
+        <u-cell-item
+          icon="star"
+          title="商品收藏"
+          @click="to(urlList[2])"
+        ></u-cell-item>
+        <u-cell-item
+          icon="more-dot-fill"
+          title="收货地址"
+          @click="to(urlList[3])"
+        ></u-cell-item>
       </u-cell-group>
     </view>
 
@@ -44,7 +56,12 @@
 export default {
   data() {
     return {
-      urlList: ["pages/center/personal"],
+      urlList: [
+        "pages/center/personal",
+        "pages/center/allOrder",
+        "pages/center/collect",
+        "pages/center/address",
+      ],
     };
   },
   methods: {
@@ -66,7 +83,7 @@ export default {
       setTimeout(() => {
         this.$u.route({
           type: "reLaunch",
-          url: 'pages/index/index',
+          url: "pages/index/index",
         });
       }, 1500);
     },
